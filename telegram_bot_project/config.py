@@ -1,10 +1,19 @@
-# إعدادات البوت
 import os
 
-# توكن البوت (يجب الحصول عليه من @BotFather)
-BOT_TOKEN = os.getenv('8363196451:AAEp2nQSiJOyrwkTHu_RhEvPHKfnoHZDCnc', '8363196451:AAEp2nQSiJOyrwkTHu_RhEvPHKfnoHZDCnc')
+TOKEN_FILE = "bot_token.txt"
 
-# النصوص والصور الافتراضية من النص الأصلي
+# إذا كان الملف موجود نقرأ التوكن منه
+if os.path.exists(TOKEN_FILE):
+    with open(TOKEN_FILE, "r") as f:
+        BOT_TOKEN = f.read().strip()
+else:
+    # أول مرة نطلب من المستخدم
+    BOT_TOKEN = input("📌 ادخل توكن البوت: ").strip()
+    # نحفظه في الملف
+    with open(TOKEN_FILE, "w") as f:
+        f.write(BOT_TOKEN)
+
+# النصوص والصور الافتراضية
 DEFAULT_TEXTS = [
     "‏ويَبقىٰ أنِيسُكَ في متاهاتِ العُمرِ القُرآن .",
     "اللهم يسر لنا أمورنا ، و اشرح لنا صدورنا .",
@@ -29,10 +38,6 @@ DEFAULT_NAMES = [
 ]
 
 DEFAULT_BOT_USERNAME = 'D7Bot'
-
-# عدد المجموعات الافتراضي
 DEFAULT_GROUP_COUNT = 50
-
-# عدد الرسائل لكل مجموعة
 DEFAULT_MESSAGE_COUNT = 10
 
